@@ -1,90 +1,103 @@
 #include <iostream>
 using namespace std;
 
-class My_Queue{
-    private:
-        int  A[ 10 ];
-        int Rear;
-        int Front;
-    
-    public:
-        void IniliatizeQueue();
-        
-        void Insert ( int Value);
+class MyQueue {
+private:
+    int A[10];      // Array size = 10
+    int Front;
+    int Rear;
+public:
+    // Initialize queue
+    void InitializeQueue() {
+        Front = -1;
+        Rear = -1;
+    }
 
-        void Remove();
+    // Check if queue is empty
+    bool isEmpty() {
+        return (Front == -1 && Rear == -1);
+    }
 
-        int PeekFront();
+    // Check if queue is full
+    bool isFull() {
+        return (Rear == 9);
+    }
 
-        int QueueSize();
+    // Insert element (enqueue)
+    void Insert(int value) {
+        if (isFull()) {
+            cout << "Queue is full!\n";
+            return;
+        }
+        if (isEmpty()) {
+            Front = Rear = 0;
+        } else {
+            Rear++;
+        }
+        A[Rear] = value;
+    }
 
-        bool isEmpty();
+    // Remove element (dequeue)
+    void Remove() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return;
+        }
+        if (Front == Rear) { // Only one element
+            Front = Rear = -1;
+        } else {
+            Front++; // Move front forward
+        }
+    }
 
-        bool isFull();
+    // Peek front element
+    int PeekFront() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return -1;
+        }
+        return A[Front];
+    }
 
-        void PrintQ();
+    // Queue size
+    int QueueSize() {
+        if (isEmpty()) return 0;
+        return Rear - Front + 1;
+    }
 
-};
-
- void My_Queue::IniliatizeQueue(){
-    Rear = -1;
-    Front = -1;
-}
-
- void My_Queue::Insert(int Value){
-    if(Rear == -1 && Front == -1){
-        Rear = 0;
-        Front = 0;
-        A[ Rear ] = Value;
-
-    }else{
-        Rear++;
-        A[ Rear] = Value;
+    // Print all elements
+    void PrintQ() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return;
+        }
+        cout << "Queue: ";
+        for (int i = Front; i <= Rear; i++) {
+            cout << A[i] << " ";
+        }
+        cout << endl;
     }
 };
- void My_Queue::Remove(){
-    Rear--;
- }
- void My_Queue::PrintQ(){
-    for ( int i = 0; i<= Rear; i++){
-        cout<<A[i]<<" ";
-    }
-    cout<<endl;
- }
 
- int My_Queue::QueueSize(){
-    
-    return Rear - Front + 1;
-}
+// Main function to test
+int main() {
+    MyQueue Q;
+    Q.InitializeQueue();
 
-// Check if queue is empty
-bool My_Queue::isEmpty(){
-    return (Front == -1 && Rear == -1);
-}
+    Q.Insert(10);
+    Q.Insert(20);
+    Q.Insert(30);
+    Q.PrintQ();             // Queue: 10 20 30
 
-// Check if queue is full
-bool My_Queue::isFull(){
-    return (Rear == 9); // array size = 10
-}
-int My_Queue::PeekFront(){
-    //if(isEmpty())
-      //  cout << "Queue is empty\n";
-      //  return -1;
-    
-    return A[Front];
-}
+    Q.Remove();
+    Q.PrintQ();             // Queue: 20 30
 
-int main(){
+    cout << "Peek front: " << Q.PeekFront() << endl; // 20
+    cout << "Queue size: " << Q.QueueSize() << endl; // 2
 
-    My_Queue MyQ_1;
-    MyQ_1.IniliatizeQueue();
-    MyQ_1.Insert(10);
-    MyQ_1.Insert(14);
-    MyQ_1.PrintQ();
-    MyQ_1.Remove();
-    MyQ_1.PrintQ();
+    Q.Insert(40);
+    Q.Insert(50);
+    Q.PrintQ();             // Queue: 20 30 40 50
 
-    cout << "Peek front: " << MyQ_1.PeekFront() << endl;
-    cout << "Queue size: " << MyQ_1.QueueSize() << endl;
     return 0;
 }
