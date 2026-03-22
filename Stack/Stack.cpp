@@ -20,23 +20,41 @@ class My_Stack{
      
 };
 
-
+// this is function use for push
 void My_Stack::Push(int value){
+    if(isFull()){
+        cout<<"Stack Overflow"<<endl;
+        return;
+    }
     top++;
     Arr[top] = value;
 };
 
 void My_Stack::PrintStack() {
+    if(isEmpty()){
+        cout<<"Stack it empty"<<endl;
+        return;
+    }
+    
     for ( int i = 0; i <= top ; i++)
     cout<< Arr[i] <<" ";
     cout<<endl;
 };
 
 void My_Stack::Pop(){
+    if(isEmpty()){
+        cout<<"Stack Underflow"<<endl;
+        return;
+    }
 top--;
+
 };
 
 int My_Stack::Peek() {
+    if(isEmpty()){
+        cout<<"Stack is empty"<<endl;
+        return -1;
+    }
     return Arr[top];
 
 };
