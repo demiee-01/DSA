@@ -32,7 +32,7 @@ void My_Stack::Push(int value){
 
 void My_Stack::PrintStack() {
     if(isEmpty()){
-        cout<<"Stack it empty"<<endl;
+        cout<<"Stack is empty"<<endl;
         return;
     }
     
