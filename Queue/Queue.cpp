@@ -61,12 +61,16 @@ public:
 
     // Queue size
     int QueueSize() {
-        if (isEmpty()) return 0;
-        return Rear - Front + 1;
+        if (isEmpty()) {
+            return 0; 
+        }else{
+           return Rear - Front + 1; 
+        }
+        
     }
 
     // Print all elements
-    void PrintQ() {
+    void PrintQueue() {
         if (isEmpty()) {
             cout << "Queue is empty!\n";
             return;
@@ -86,18 +90,19 @@ int main() {
 
     Q.Insert(10);
     Q.Insert(20);
-    Q.Insert(30);
-    Q.PrintQ();             // Queue: 10 20 30
+    Q.PrintQueue();             // Queue: 10 20 
 
     Q.Remove();
-    Q.PrintQ();             // Queue: 20 30
+    Q.PrintQueue();            
+    Q.Insert(30);
+    Q.PrintQueue(); 
 
     cout << "Peek front: " << Q.PeekFront() << endl; // 20
     cout << "Queue size: " << Q.QueueSize() << endl; // 2
+    cout << "Is empty? " << Q.isEmpty() << endl;
+    cout << "Is full? " << Q.isFull() << endl;
 
-    Q.Insert(40);
-    Q.Insert(50);
-    Q.PrintQ();             // Queue: 20 30 40 50
-
+    Q.PrintQueue();             
+    
     return 0;
 }
