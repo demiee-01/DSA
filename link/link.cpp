@@ -91,7 +91,7 @@ void printList() {
         cout << " -> Address: " << temp << endl;
         temp = temp->link;
     }
-    cout << "-------------------\n";
+    cout << "----------------------\n";
 }
 
 // Main Function
